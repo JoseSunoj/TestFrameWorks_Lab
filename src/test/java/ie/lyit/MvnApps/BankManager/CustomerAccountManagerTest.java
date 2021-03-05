@@ -106,7 +106,11 @@ class CustomerAccountManagerTest {
 	 */
 	@Test
 	void testVerifyCustomer() {
-		
+		var aCustomer = new Customer("Sunoj Jose", "12345678");
+		manager.customers.put(aCustomer, 0.0);
+		Assertions.assertThrows(RuntimeException.class, () -> {
+			manager.verifyCustomer(aCustomer);
+		});
 		
 	}
 
@@ -116,7 +120,10 @@ class CustomerAccountManagerTest {
 	 */
 	@Test
 	void testDeposit() {
-		fail("Not yet implemented"); // TODO
+		var aCustomer = new Customer("Sunoj Jose", "12345678");
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			manager.deposit(aCustomer, 0.0);
+		});
 	}
 
 	/**
