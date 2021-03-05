@@ -56,9 +56,9 @@ public class CustomerAccountManager {
 	protected void deposit(Customer customer, Double amount) {
 		if (amount <= 0.0) {
 			throw new IllegalArgumentException("Amount must be a positive value.");
-		} else {
-			customers.put(customer, customers.get(customer) + amount);
 		}
+		customers.put(customer, customers.get(customer) + amount);
+
 	}
 
 	/**
@@ -69,9 +69,8 @@ public class CustomerAccountManager {
 	protected void withdraw(Customer customer, Double amount) {
 		if (amount > customers.get(customer)) {
 			throw new IllegalArgumentException("Amount exceeds the available limit.");
-		} else {
-			customers.put(customer, customers.get(customer) - amount);
 		}
+		customers.put(customer, customers.get(customer) - amount);
 
 	}
 

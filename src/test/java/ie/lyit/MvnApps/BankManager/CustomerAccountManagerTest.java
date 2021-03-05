@@ -7,8 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -18,12 +20,13 @@ import org.junit.jupiter.api.Test;
 class CustomerAccountManagerTest {
 
 	private CustomerAccountManager manager;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		
+
 	}
 
 	/**
@@ -49,7 +52,8 @@ class CustomerAccountManagerTest {
 	}
 
 	/**
-	 * Test method for {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#addCustomer(java.lang.String, java.lang.String)}.
+	 * Test method for
+	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#addCustomer(java.lang.String, java.lang.String)}.
 	 */
 	@Test
 	void testAddCustomer() {
@@ -59,23 +63,56 @@ class CustomerAccountManagerTest {
 	}
 
 	/**
-	 * Test method for {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#validateCustomer(ie.lyit.MvnApps.BankManager.Customer)}.
+	 * Test method for
+	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#validateCustomer(ie.lyit.MvnApps.BankManager.Customer)}.
 	 */
 	@Test
+	@DisplayName("Should Not Create Customer Object for null values")
 	void testValidateCustomer() {
-		fail("Not yet implemented"); // TODO
+		Assertions.assertThrows(RuntimeException.class, () -> {
+			manager.addCustomer(null, null);
+		});
 	}
 
 	/**
-	 * Test method for {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#verifyCustomer(ie.lyit.MvnApps.BankManager.Customer)}.
+	 * Test method for
+	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#validateCustomer(ie.lyit.MvnApps.BankManager.Customer)}.
+	 * 
+	 */
+	@Test
+	@DisplayName("Should Not Create Customer Object for null values/ wrong argument types")
+	void testValidateCustomerTwo() {
+		Assertions.assertThrows(RuntimeException.class, () -> {
+			manager.addCustomer(null, "1");
+		});
+	}
+
+	/**
+	 * Test method for
+	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#validateCustomer(ie.lyit.MvnApps.BankManager.Customer)}.
+	 * 
+	 */
+	@Test
+	@DisplayName("Should Not Create Customer Object for wrong argument types")
+	void testValidateCustomerThree() {
+		Assertions.assertThrows(RuntimeException.class, () -> {
+			manager.addCustomer("Sunoj Jose", "abcdefgh");
+		});
+	}
+
+	/**
+	 * Test method for
+	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#verifyCustomer(ie.lyit.MvnApps.BankManager.Customer)}.
 	 */
 	@Test
 	void testVerifyCustomer() {
-		fail("Not yet implemented"); // TODO
+		
+		
 	}
 
 	/**
-	 * Test method for {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#deposit(ie.lyit.MvnApps.BankManager.Customer, java.lang.Double)}.
+	 * Test method for
+	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#deposit(ie.lyit.MvnApps.BankManager.Customer, java.lang.Double)}.
 	 */
 	@Test
 	void testDeposit() {
@@ -83,7 +120,8 @@ class CustomerAccountManagerTest {
 	}
 
 	/**
-	 * Test method for {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#withdraw(ie.lyit.MvnApps.BankManager.Customer, java.lang.Double)}.
+	 * Test method for
+	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#withdraw(ie.lyit.MvnApps.BankManager.Customer, java.lang.Double)}.
 	 */
 	@Test
 	void testWithdraw() {
@@ -91,7 +129,8 @@ class CustomerAccountManagerTest {
 	}
 
 	/**
-	 * Test method for {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#getBalanceInfo(ie.lyit.MvnApps.BankManager.Customer)}.
+	 * Test method for
+	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#getBalanceInfo(ie.lyit.MvnApps.BankManager.Customer)}.
 	 */
 	@Test
 	void testGetBalanceInfo() {
