@@ -68,6 +68,12 @@ public class Customer {
 		if (this.acNumber.isBlank()) {
 			throw new RuntimeException("Account Number shuold not be empty.");
 		}
+		if (this.acNumber.length()!= 8) {
+			throw new RuntimeException("Account Number shuold be of length 8.");
+		}
+		if (!this.acNumber.matches("\\d+")) {
+			throw new RuntimeException("Account Number shuold contain only didgits.");
+		}
 	}
 
 	/**

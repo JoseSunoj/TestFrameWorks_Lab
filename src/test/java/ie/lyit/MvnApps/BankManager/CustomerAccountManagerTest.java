@@ -36,6 +36,7 @@ class CustomerAccountManagerTest {
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
+		Customer customer = new Customer("Sunoj Jose", "12345678");
 	}
 
 	/**
