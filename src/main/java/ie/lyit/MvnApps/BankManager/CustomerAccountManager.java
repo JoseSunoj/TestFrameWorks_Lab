@@ -57,7 +57,7 @@ public class CustomerAccountManager {
 		if (amount <= 0.0) {
 			throw new IllegalArgumentException("Amount must be a positive value.");
 		}
-		customers.put(customer, customers.get(customer) + amount);
+		customers.put(customer, customers.containsKey(customer) ? customers.get(customer) + amount : amount);
 
 	}
 

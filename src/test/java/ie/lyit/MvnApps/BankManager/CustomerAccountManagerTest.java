@@ -126,7 +126,14 @@ class CustomerAccountManagerTest {
 			manager.deposit(aCustomer, 0.0);
 		});
 	}
-	
+
+	@Test
+	@DisplayName("Should allow deposit operation for amount more than 0.")
+	void testDepositOne() {
+		var aCustomer = new Customer("Sunoj Jose", "12345678");
+		manager.deposit(aCustomer, 1000.0);
+		assertEquals(1000.0, manager.customers.get(aCustomer));
+	}
 
 	/**
 	 * Test method for
