@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 /**
  * @author Sunoj Jose
@@ -99,7 +101,14 @@ class CustomerAccountManagerTest {
 			manager.addCustomer("Sunoj Jose", "abcdefgh");
 		});
 	}
-
+	
+	@ParameterizedTest
+	@CsvSource({"1", "123","abcd1234", "6789aBCD", "123456789"})
+	void testValidateCustomerFour(String value) {
+		Assertions.assertThrows(RuntimeException.class, () -> {
+			manager.addCustomer("Sunoj Jose", value);
+		});
+	}
 	/**
 	 * Test method for
 	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#verifyCustomer(ie.lyit.MvnApps.BankManager.Customer)}.
@@ -127,6 +136,10 @@ class CustomerAccountManagerTest {
 		});
 	}
 
+	/**
+	 * Test method for
+	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#deposit(ie.lyit.MvnApps.BankManager.Customer, java.lang.Double)}.
+	 */
 	@Test
 	@DisplayName("Should allow deposit operation for amount more than 0.")
 	void testDepositOne() {
