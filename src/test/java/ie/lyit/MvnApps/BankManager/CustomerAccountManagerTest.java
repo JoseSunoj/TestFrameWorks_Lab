@@ -105,13 +105,13 @@ class CustomerAccountManagerTest {
 	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#verifyCustomer(ie.lyit.MvnApps.BankManager.Customer)}.
 	 */
 	@Test
+	@DisplayName("Should Not allow duplicate entries.")
 	void testVerifyCustomer() {
 		var aCustomer = new Customer("Sunoj Jose", "12345678");
 		manager.customers.put(aCustomer, 0.0);
 		Assertions.assertThrows(RuntimeException.class, () -> {
 			manager.verifyCustomer(aCustomer);
 		});
-		
 	}
 
 	/**
@@ -119,12 +119,14 @@ class CustomerAccountManagerTest {
 	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#deposit(ie.lyit.MvnApps.BankManager.Customer, java.lang.Double)}.
 	 */
 	@Test
+	@DisplayName("Should Not allow deposit operation for amount less than 1.")
 	void testDeposit() {
 		var aCustomer = new Customer("Sunoj Jose", "12345678");
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			manager.deposit(aCustomer, 0.0);
 		});
 	}
+	
 
 	/**
 	 * Test method for
