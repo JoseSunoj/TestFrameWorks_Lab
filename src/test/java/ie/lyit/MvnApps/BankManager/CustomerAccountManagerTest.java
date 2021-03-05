@@ -17,11 +17,13 @@ import org.junit.jupiter.api.Test;
  */
 class CustomerAccountManagerTest {
 
+	private CustomerAccountManager manager;
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
 	}
 
 	/**
@@ -36,7 +38,7 @@ class CustomerAccountManagerTest {
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		var manager = new CustomerAccountManager();
+		manager = new CustomerAccountManager();
 	}
 
 	/**
@@ -51,7 +53,9 @@ class CustomerAccountManagerTest {
 	 */
 	@Test
 	void testAddCustomer() {
-		fail("Not yet implemented"); // TODO
+		manager.addCustomer("Sunoj Jose", "12345678");
+		assertEquals(1, manager.customers.size());
+		assertFalse(manager.customers.isEmpty());
 	}
 
 	/**
