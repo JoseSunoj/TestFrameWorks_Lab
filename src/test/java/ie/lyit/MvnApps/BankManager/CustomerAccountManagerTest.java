@@ -101,14 +101,15 @@ class CustomerAccountManagerTest {
 			manager.addCustomer("Sunoj Jose", "abcdefgh");
 		});
 	}
-	
+
 	@ParameterizedTest
-	@CsvSource({"1", "123","abcd1234", "6789aBCD", "123456789"})
+	@CsvSource({ "1", "123", "abcd1234", "6789aBCD", "123456789" })
 	void testValidateCustomerFour(String value) {
 		Assertions.assertThrows(RuntimeException.class, () -> {
 			manager.addCustomer("Sunoj Jose", value);
 		});
 	}
+
 	/**
 	 * Test method for
 	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#verifyCustomer(ie.lyit.MvnApps.BankManager.Customer)}.
@@ -153,8 +154,28 @@ class CustomerAccountManagerTest {
 	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#withdraw(ie.lyit.MvnApps.BankManager.Customer, java.lang.Double)}.
 	 */
 	@Test
+	@DisplayName("Should not allow withdraw operation for amount more than available value.")
 	void testWithdraw() {
-		fail("Not yet implemented"); // TODO
+		var aCustomer = new Customer("Sunoj Jose", "12345678");
+		manager.deposit(aCustomer, 1000.0);
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			manager.withdraw(aCustomer, 1001.0);
+		});
+	}
+
+	/**
+	 * Test method for
+	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#withdraw(ie.lyit.MvnApps.BankManager.Customer, java.lang.Double)}.
+	 */
+	@Test
+	@DisplayName("Should allow withdraw operation for amount upto available value.")
+	void testWithdrawOne() {
+		var aCustomer = new Customer("Sunoj Jose", "12345678");
+		manager.deposit(aCustomer, 1000.0);
+		assertTrue(manager.customers.get(aCustomer)== 1000.0);
+		manager.withdraw(aCustomer, 1000.0);
+		assertEquals(0.0, manager.customers.get(aCustomer));
+
 	}
 
 	/**
