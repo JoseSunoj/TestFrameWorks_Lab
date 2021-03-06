@@ -29,6 +29,7 @@ class CustomerAccountManagerTest {
 	 */
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		System.out.println("Begins Tests for CustomerAccountManager.");
 
 	}
 
@@ -37,6 +38,7 @@ class CustomerAccountManagerTest {
 	 */
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
+		System.out.println("Finished All Tests for CustomerAccountManager.");
 	}
 
 	/**
@@ -53,6 +55,8 @@ class CustomerAccountManagerTest {
 	 */
 	@AfterEach
 	void tearDown() throws Exception {
+		manager = null;
+		aCustomer = null;
 	}
 
 	/**
