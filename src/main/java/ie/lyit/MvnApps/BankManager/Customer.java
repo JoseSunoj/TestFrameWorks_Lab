@@ -19,8 +19,8 @@ public class Customer {
 	 */
 	public Customer(String name, String acNumber) {
 		super();
-		this.name = name;
-		this.acNumber = acNumber;
+		setName(name);
+		setAcNumber(acNumber);
 	}
 
 	/**
