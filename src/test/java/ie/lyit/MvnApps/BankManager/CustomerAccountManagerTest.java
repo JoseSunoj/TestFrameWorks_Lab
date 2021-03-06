@@ -22,6 +22,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 class CustomerAccountManagerTest {
 
 	private CustomerAccountManager manager;
+	private Customer aCustomer;
 
 	/**
 	 * @throws java.lang.Exception
@@ -44,6 +45,7 @@ class CustomerAccountManagerTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		manager = new CustomerAccountManager();
+		aCustomer = new Customer("Sunoj Jose", "12345678");
 	}
 
 	/**
@@ -117,7 +119,6 @@ class CustomerAccountManagerTest {
 	@Test
 	@DisplayName("Should Not allow duplicate entries.")
 	void testVerifyCustomer() {
-		var aCustomer = new Customer("Sunoj Jose", "12345678");
 		manager.customers.put(aCustomer, 0.0);
 		Assertions.assertThrows(RuntimeException.class, () -> {
 			manager.verifyCustomer(aCustomer);
@@ -131,7 +132,6 @@ class CustomerAccountManagerTest {
 	@Test
 	@DisplayName("Should Not allow deposit operation for amount less than 1.")
 	void testDeposit() {
-		var aCustomer = new Customer("Sunoj Jose", "12345678");
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			manager.deposit(aCustomer, 0.0);
 		});
@@ -144,7 +144,6 @@ class CustomerAccountManagerTest {
 	@Test
 	@DisplayName("Should allow deposit operation for amount more than 0.")
 	void testDepositOne() {
-		var aCustomer = new Customer("Sunoj Jose", "12345678");
 		manager.deposit(aCustomer, 1000.0);
 		assertEquals(1000.0, manager.customers.get(aCustomer));
 	}
@@ -156,7 +155,6 @@ class CustomerAccountManagerTest {
 	@Test
 	@DisplayName("Should not allow withdraw operation for amount more than available value.")
 	void testWithdraw() {
-		var aCustomer = new Customer("Sunoj Jose", "12345678");
 		manager.deposit(aCustomer, 1000.0);
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			manager.withdraw(aCustomer, 1001.0);
@@ -170,9 +168,8 @@ class CustomerAccountManagerTest {
 	@Test
 	@DisplayName("Should allow withdraw operation for amount upto available value.")
 	void testWithdrawOne() {
-		var aCustomer = new Customer("Sunoj Jose", "12345678");
 		manager.deposit(aCustomer, 1000.0);
-		assertTrue(manager.customers.get(aCustomer)== 1000.0);
+		assertTrue(manager.customers.get(aCustomer) == 1000.0);
 		manager.withdraw(aCustomer, 1000.0);
 		assertEquals(0.0, manager.customers.get(aCustomer));
 
@@ -182,9 +179,13 @@ class CustomerAccountManagerTest {
 	 * Test method for
 	 * {@link ie.lyit.MvnApps.BankManager.CustomerAccountManager#getBalanceInfo(ie.lyit.MvnApps.BankManager.Customer)}.
 	 */
+
 	@Test
 	void testGetBalanceInfo() {
-		fail("Not yet implemented"); // TODO
+		manager.deposit(aCustomer, 100.0);
+		assertTrue(manager.getBalanceInfo(aCustomer) == 100.0);
+		manager.withdraw(aCustomer, 100.0);
+		assertFalse(manager.getBalanceInfo(aCustomer) == 100.0);
 	}
 
 }
